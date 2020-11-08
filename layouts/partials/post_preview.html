@@ -19,14 +19,21 @@
     <p class="post-meta">
         {{ partial "post_meta.html" . }}
     </p>
-    <div class="post-entry">
-        {{ if .Truncated }}
-        {{ .Summary }}
-        <a href="{{ .Permalink }}" class="post-read-more">[{{ i18n "readMore" }}]</a>
-        {{ else }}
-        {{ .Content }}
-        {{ end }}
-    </div>
+    {{ if .Params.summary }}
+        <div class="post-entry">
+            {{ .Params.summary }}
+            <a href="{{ .Permalink }}" class="post-read-more">[{{ i18n "readMore" }}]</a>
+        </div>
+    {{ else }}
+        <div class="post-entry">
+            {{ if .Truncated }}
+            {{ .Summary }}
+            <a href="{{ .Permalink }}" class="post-read-more">[{{ i18n "readMore" }}]</a>
+            {{ else }}
+            {{ .Content }}
+            {{ end }}
+        </div>
+    {{ end }}
 
     {{ if .Params.tags }}
     <div class="blog-tags">
